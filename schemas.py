@@ -38,11 +38,13 @@ class Product(BaseModel):
     category: str = Field(..., description="Product category")
     in_stock: bool = Field(True, description="Whether product is in stock")
 
-# Add your own schemas here:
-# --------------------------------------------------
-
-# Note: The Flames database viewer will automatically:
-# 1. Read these schemas from GET /schema endpoint
-# 2. Use them for document validation when creating/editing
-# 3. Handle all database operations (CRUD) directly
-# 4. You don't need to create any database endpoints!
+# Curd intake tracker schema
+class CurdEntry(BaseModel):
+    """
+    Curd intake entries
+    Collection name: "curdentry"
+    """
+    date: str = Field(..., description="Date in YYYY-MM-DD format")
+    time: str = Field(..., description="Time in HH:MM 24h format")
+    quantity: float = Field(..., ge=0, description="Quantity in ml")
+    amount: float = Field(0, ge=0, description="Amount paid in INR")
